@@ -11,7 +11,7 @@ def bingo(field_,draws_,best_amount_draws_,last_draw_):
         if field_[row_][col_] == draw:
           field_[row_][col_] = 100
           if numpy.array_equal(field_[0], numpy.array([100,100,100,100,100])) or numpy.array_equal(field_[1], numpy.array([100,100,100,100,100])) or numpy.array_equal(field_[2], numpy.array([100,100,100,100,100])) or  numpy.array_equal(field_[3], numpy.array([100,100,100,100,100])) or numpy.array_equal(field_[4], numpy.array([100,100,100,100,100])) or numpy.array_equal(field_[:,0], numpy.array([100,100,100,100,100])) or numpy.array_equal(field_[:,1], numpy.array([100,100,100,100,100])) or numpy.array_equal(field_[:,2], numpy.array([100,100,100,100,100])) or numpy.array_equal(field_[:,3], numpy.array([100,100,100,100,100])) or numpy.array_equal(field_[:,4], numpy.array([100,100,100,100,100])):
-            if(best_amount_draws_ > number_draw):
+            if(best_amount_draws_ < number_draw):
               best_amount_draws_ = number_draw
               last_draw_ = draw
               new_best = True
@@ -31,7 +31,7 @@ row = 0
 col = 0
 
 best_field = [] #NUMBER OF BEST FIELD IN FIELDS ARRAY
-best_amount_draws = 100 #AMOUNT OF DRAWEN NUMBERS FOR BEST FIELD
+best_amount_draws = 0 #AMOUNT OF DRAWEN NUMBERS FOR BEST FIELD
 last_draw = 0 #LAST DRAWEN NUMBER OF BETS FIELD
 new_best = False
 with open("input.txt") as file:
@@ -44,7 +44,8 @@ with open("input.txt") as file:
       best_amount_draws, last_draw, new_best = bingo(field,draws,best_amount_draws,last_draw)
       if new_best == True:
         best_field = field
-        print("NEW BEST FOUND: " + str(best_amount_draws))
+        print("NEW WORST FOUND: " + str(best_amount_draws))
+        print("last drawn: " + str(last_draw))
         print(best_field)
       new_best = False
     else:
